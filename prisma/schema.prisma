@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  password     String
+  tokenVersion Int      @default(0)
+  searches     Search[]
+  words        Word[]
+}
+
+enum Language {
+  de
+}
+
+model Word {
+  id        Int       @id @default(autoincrement())
+  text      String    @unique
+  language  Language
+  m         Boolean
+  f         Boolean
+  n         Boolean
+  wikiUrl   String
+  createdAt DateTime? @default(now())
+  guesses   Guess[]
+  users     User[]
+}
+
+model Search {
+  id        Int       @id @default(autoincrement())
+  word      String
+  createdAt DateTime? @default(now())
+  success   Boolean
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model Guess {
+  id        Int       @id @default(autoincrement())
+  word      Word      @relation(fields: [wordId], references: [id])
+  wordId    Int
+  sucess    Boolean
+  createdAt DateTime? @default(now())
+}
