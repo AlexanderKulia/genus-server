@@ -17,6 +17,7 @@ model User {
   tokenVersion Int      @default(0)
   searches     Search[]
   words        Word[]
+  guess        Guess[]
 }
 
 enum Language {
@@ -45,10 +46,19 @@ model Search {
   userId    Int?
 }
 
+enum Genus {
+  der
+  die
+  das
+}
+
 model Guess {
   id        Int       @id @default(autoincrement())
+  genus     Genus
   word      Word      @relation(fields: [wordId], references: [id])
   wordId    Int
-  sucess    Boolean
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  success   Boolean
   createdAt DateTime? @default(now())
 }

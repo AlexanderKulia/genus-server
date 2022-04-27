@@ -6,7 +6,7 @@ import { lastValueFrom } from "rxjs";
 import { PrismaService } from "./prisma.service";
 
 const germanWordSelector = "strong[lang='de']";
-const germanGenderSelector = `${germanWordSelector} + span.gender`;
+const germanGenusSelector = `${germanWordSelector} + span.gender`;
 const wikiBaseUrl = "https://en.wiktionary.org/wiki/";
 
 @Injectable()
@@ -46,19 +46,19 @@ export class AppService {
       const res = await lastValueFrom(this.httpService.get(url));
       const html = res.data;
       const dom = new JSDOM(html);
-      const genderElements =
-        dom.window.document.querySelectorAll(germanGenderSelector);
+      const genusElements =
+        dom.window.document.querySelectorAll(germanGenusSelector);
 
-      const genders = [];
-      for (const g of genderElements) {
-        if (g) genders.push(g.textContent);
+      const genera = [];
+      for (const g of genusElements) {
+        if (g) genera.push(g.textContent);
       }
 
       const wordData: Prisma.WordCreateInput = {
         text: word,
-        m: genders.includes("m") ? true : false,
-        f: genders.includes("f") ? true : false,
-        n: genders.includes("n") ? true : false,
+        m: genera.includes("m") ? true : false,
+        f: genera.includes("f") ? true : false,
+        n: genera.includes("n") ? true : false,
         language: "de",
         wikiUrl: url,
       };

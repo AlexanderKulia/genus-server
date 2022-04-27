@@ -4,11 +4,18 @@ import { ConfigModule } from "@nestjs/config";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
+import { HistoryModule } from "./history/history.module";
+import { PracticeModule } from "./practice/practice.module";
 import { PrismaService } from "./prisma.service";
-import { TrainingModule } from './training/training.module';
 
 @Module({
-  imports: [HttpModule, ConfigModule.forRoot(), AuthModule, TrainingModule],
+  imports: [
+    HttpModule,
+    ConfigModule.forRoot(),
+    AuthModule,
+    PracticeModule,
+    HistoryModule,
+  ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
