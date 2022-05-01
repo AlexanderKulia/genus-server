@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { Controller, Get, Query, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Search, User } from "@prisma/client";
 import { PResponse } from "../../types";
@@ -12,17 +12,17 @@ import { HistoryService } from "./history.service";
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
 
-  @Post()
+  @Get()
   getHistory(
-    @Body() getHistoryDto: GetHistoryDto,
+    @Query() getHistoryDto: GetHistoryDto,
     @GetUser() user: User,
   ): Promise<PResponse<Search>> {
     return this.historyService.getHistory(getHistoryDto, user);
   }
 
-  @Post("top")
+  @Get("top")
   getTopSearches(
-    @Body() getTopSearchesDto: GetTopSearchesDto,
+    @Query() getTopSearchesDto: GetTopSearchesDto,
     @GetUser() user: User,
   ): Promise<{ count: number; word: string }[]> {
     const { n } = getTopSearchesDto;
