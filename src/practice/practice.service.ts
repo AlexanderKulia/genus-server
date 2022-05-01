@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Genus, Prisma, PrismaClient, User, Word } from "@prisma/client";
-import { PracticeResults } from "../../types";
+import { PracticeResults } from "../types";
 import { GetResultsDto } from "./dto/get-results.dto";
 
 @Injectable()

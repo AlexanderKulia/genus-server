@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma, Search, User } from "@prisma/client";
-import { PResponse } from "../../types";
 import { PrismaService } from "../prisma.service";
+import { PResponse } from "../types";
 import { GetHistoryDto } from "./dto/get-history.dto";
 
 @Injectable()

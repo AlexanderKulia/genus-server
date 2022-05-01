@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { User, Word } from "@prisma/client";
-import { PracticeResults } from "../../types";
 import { GetUser } from "../auth/get-user.decorator";
+import { PracticeResults } from "../types";
 import { GetPracticeWordsDto } from "./dto/get-practice-words.dto";
 import { GetResultsDto } from "./dto/get-results.dto";
 import { PracticeService } from "./practice.service";

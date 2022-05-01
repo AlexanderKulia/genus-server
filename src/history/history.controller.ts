@@ -1,8 +1,8 @@
 import { Controller, Get, Query, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Search, User } from "@prisma/client";
-import { PResponse } from "../../types";
 import { GetUser } from "../auth/get-user.decorator";
+import { PResponse } from "../types";
 import { GetHistoryDto } from "./dto/get-history.dto";
 import { GetTopSearchesDto } from "./dto/get-top-searches.dto";
 import { HistoryService } from "./history.service";
