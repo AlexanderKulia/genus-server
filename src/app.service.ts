@@ -42,7 +42,8 @@ export class AppService {
     }
 
     try {
-      const url = `${wikiBaseUrl}${capitalizedWord}`;
+      const url = `${wikiBaseUrl}${encodeURIComponent(capitalizedWord)}`;
+      console.log(url);
       const res = await lastValueFrom(this.httpService.get(url));
       const html = res.data;
       const dom = new JSDOM(html);
